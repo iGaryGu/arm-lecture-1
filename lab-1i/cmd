@@ -1,0 +1,8 @@
+#!/bin/sh
+
+max=46
+
+for i in `seq $max`
+do
+	time --format %e yes $i | qemu-arm -L /usr/arm-linux-gnueabihf ./fibseq
+done
