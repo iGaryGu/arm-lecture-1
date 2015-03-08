@@ -23,10 +23,8 @@ fibseq.o: fibseq.c
 clean:
 	rm -f $(objects) fibseq
 
-QEMU_CMD = qemu-arm -L /usr/arm-linux-gnueabihf ./fibseq &
-CMD = yes 9 | $(call QEMU_CMD) && sleep 1
 sh:fibseq
 	@sh cmd
 qemu: fibseq
 	@bash unitest.sh
-	@yes 10 | $(call QEMU_CMD)
+	@yes 10 | $(EXEC_ARM) ./fibseq &

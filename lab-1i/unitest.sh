@@ -5,7 +5,7 @@ array=(5 6 9)
 
 for i in ${array[*]}
 do
-	yes $i | qemu-arm -L /usr/arm-linux-gnueabihf ./fibseq
+	yes $i | $EXEC_ARM ./fibseq
 	ans=$?
 	content=$(grep "^$i:" testbook)
 	testans="${content#*:}"

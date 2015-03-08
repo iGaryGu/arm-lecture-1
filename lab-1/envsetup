@@ -1,0 +1,1 @@
+export EXEC_ARM="qemu-arm -L /usr/arm-linux-gnueabihf"
