@@ -28,4 +28,5 @@ CMD = yes 9 | $(call QEMU_CMD) && sleep 1
 sh:fibseq
 	@sh cmd
 qemu: fibseq
-	@yes 45 | $(call QEMU_CMD)
+	@bash unitest.sh
+	@yes 10 | $(call QEMU_CMD)
