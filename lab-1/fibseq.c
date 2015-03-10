@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <time.h>
+#include <stdlib.h>
 
 extern int fibonacci(int x);
 
@@ -11,6 +11,6 @@ int main(int argc, char **argv)
   scanf("%d",&number);
   result = fibonacci(number);   
   printf("The fibonacci sequence at %d is: %d\n", number, result);
-  return result;
+
 }
 
