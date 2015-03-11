@@ -3,26 +3,16 @@ CFLAGS	= -O1 -Wall
 LDFLAGS = -fno-stack-protector
 
 objects	= fibseq.o fib.o
-objects_low= fibseq_low.o fib.o
-objects_high = fibseq_high.o fib.o
 
-default: fibseq fibseq_high fibseq_low
+default: fibseq
 
 .PHONY: default clean qemu
 
 fibseq: $(objects)
 	$(CC) $(LDFLAGS) -o $@ $^
 
-fibseq_low: $(objects_low)
-	$(CC) $(LDFLAGS) -o $@ $^
-
-fibseq_high: $(objects_high)
-	$(CC) $(LDFLAGS) -o $@ $^
-
 fib.o: fib.s
 fibseq.o: fibseq.c
-fibseq_low.o: fibseq_low.c
-fibseq_high.o: fibseq_high.c
 
 %.o: %.c
 	$(CC) -c $(CFLAGS) -o $@ $<
@@ -31,7 +21,7 @@ fibseq_high.o: fibseq_high.c
 	$(CC) -c $(CFLAGS) -o $@ $<
 
 clean:
-	rm -f $(objects) $(objects_high) $(objects_low) fibseq fibseq_high fibseq_low
+	rm -f $(objects) fibseq
 
 sh:fibseq
 	@sh cmd

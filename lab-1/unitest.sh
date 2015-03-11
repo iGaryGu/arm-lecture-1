@@ -1,14 +1,14 @@
 #!/bin/bash
 echo "unit testing ...."
 
-array=(5 6 20)
+array=(21 16 20)
 
 for i in ${array[*]}
 do
-	yes $i | $EXEC_ARM ./fibseq_low
+	yes $i | $EXEC_ARM ./fibseq 0
 	ans_low=$?
 
-	yes $i | $EXEC_ARM ./fibseq_high
+	yes $i | $EXEC_ARM ./fibseq 1
 	ans_high=$?
 		
 	ans_high=$(($ans_high<<8))
