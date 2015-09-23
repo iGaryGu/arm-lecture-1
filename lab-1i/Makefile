@@ -1,6 +1,6 @@
 CC	= arm-linux-gnueabihf-gcc
 CFLAGS	= -O1 -Wall
-LDFLAGS = -fno-stack-protector
+LDFLAGS = -fno-stack-protector -lrt
 
 objects	= fibseq.o fib.o
 
@@ -21,10 +21,17 @@ fibseq.o: fibseq.c
 	$(CC) -c $(CFLAGS) -o $@ $<
 
 clean:
-	rm -f $(objects) fibseq
+	rm -f $(objects) fibseq timing.txt output.png
 
 sh: fibseq
 	@sh cmd
+
+Fibtime: fibseq
+	@$(EXEC_ARM) ./fibseq 1 &
+
 qemu: fibseq
 	@bash unitest.sh
-	@yes 20 | $(EXEC_ARM) ./fibseq &
+	@yes 20 | $(EXEC_ARM) ./fibseq 0 &
+
+draw: fibseq timing.txt
+	@gnuplot draw.gp

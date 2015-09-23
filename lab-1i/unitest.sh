@@ -5,7 +5,7 @@ array=(5 6 9)
 
 for i in ${array[*]}
 do
-	yes $i | $EXEC_ARM ./fibseq
+	yes $i | $EXEC_ARM ./fibseq 0
 	ans=$?
 	content=$(grep "^$i:" testbook)
 	testans="${content#*:}"
