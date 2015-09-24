@@ -3,9 +3,9 @@
 #include <time.h>
 #include "fibseq_template.c"
 #define MAX 46
-#define Iter 1
+#define Iter 1000
 
-extern int fibonacci(int x);
+extern int fibonacci(int x, int a, int b);
 int (*p[2]) (int)={fib_low, fib_high};
 
 int main(int argc, char **argv)
@@ -25,14 +25,14 @@ int main(int argc, char **argv)
 		temp2 = 0.0;
 		for (j = 0; j < Iter; j++) {
 		    clock_gettime(CLOCK_REALTIME,&tt1);
-		    result = fibonacci(i);
+		    result = fibonacci(i, 0, 1);
 		    clock_gettime(CLOCK_REALTIME,&tt2);
-		    temp1 = (double)tt2.tv_sec - (double)tt1.tv_sec;
-		    temp2 = (double)tt2.tv_nsec - (double)tt1.tv_nsec;
-		    temp += (temp1*1000000000 + temp2);
+//		    temp1 = (double)tt2.tv_sec - (double)tt1.tv_sec;
+		    temp2 += ((double)tt2.tv_nsec - (double)tt1.tv_nsec);
+//		    temp += (temp1*1000000000 + temp2);
 		} 
 		printf("The fibonacci sequence at %d is: %d\n", i, result);
-		sec = temp/(double)Iter;
+		sec = temp2/(double)Iter;
 		fprintf(fpr,"%d %lf\n",i,sec);
 	    }
 	    fclose(fpr);
@@ -43,7 +43,7 @@ int main(int argc, char **argv)
         }
     } else {
 	scanf("%d",&number);
-        result = fibonacci(number);
+        result = fibonacci(number, 0, 1);
 	printf("The fibonacci sequence at %d is: %d\n", number, result);
     }
 }
