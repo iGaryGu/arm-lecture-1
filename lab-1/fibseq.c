@@ -17,22 +17,18 @@ int main(int argc, char **argv)
     if(argc == 2) {
         if (atoi(argv[1]) == 2) {    //timing statistics
 	    int i, j;
-	    double temp, temp1, temp2;
+	    double temp;
 	    FILE *fpr = fopen("timing.txt","w");
 	    for (i = 0; i <= MAX; i++) {
 		temp = 0.0;
-		temp1 = 0.0;
-		temp2 = 0.0;
 		for (j = 0; j < Iter; j++) {
 		    clock_gettime(CLOCK_REALTIME,&tt1);
 		    result = fibonacci(i, 0, 1);
 		    clock_gettime(CLOCK_REALTIME,&tt2);
-//		    temp1 = (double)tt2.tv_sec - (double)tt1.tv_sec;
-		    temp2 += ((double)tt2.tv_nsec - (double)tt1.tv_nsec);
-//		    temp += (temp1*1000000000 + temp2);
+		    temp += ((double)tt2.tv_nsec - (double)tt1.tv_nsec);
 		} 
 		printf("The fibonacci sequence at %d is: %d\n", i, result);
-		sec = temp2/(double)Iter;
+		sec = temp/(double)Iter;
 		fprintf(fpr,"%d %lf\n",i,sec);
 	    }
 	    fclose(fpr);
